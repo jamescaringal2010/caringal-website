@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caringal Website</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+    scroll-behavior:smooth;
+}
+
+body{
+    background:linear-gradient(-45deg,#0f172a,#1e293b,#2563eb,#7c3aed);
+    background-size:400% 400%;
+    animation:bgMove 15s ease infinite;
+    color:white;
+    overflow-x:hidden;
+}
+
+@keyframes bgMove{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+header{
+    text-align:center;
+    padding:60px 20px;
+}
+
+.profile{
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    border:5px solid white;
+    object-fit:cover;
+    box-shadow:0 0 30px cyan;
+    animation:float 3s ease-in-out infinite;
+}
+
+@keyframes float{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-15px);}
+}
+
+h1{
+    margin-top:20px;
+    font-size:3rem;
+    text-shadow:0 0 15px cyan;
+}
+
+.subtitle{
+    font-size:1.2rem;
+    opacity:.9;
+}
+
+.container{
+    max-width:1100px;
+    margin:auto;
+    padding:20px;
+}
+
+.card{
+    background:rgba(255,255,255,0.1);
+    backdrop-filter:blur(15px);
+    border-radius:20px;
+    padding:25px;
+    margin:20px 0;
+    transition:0.4s;
+    opacity:0;
+    transform:translateY(50px);
+}
+
+.card.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+.card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 0 25px cyan;
+}
+
+.counter{
+    text-align:center;
+    font-size:24px;
+    font-weight:bold;
+    margin-bottom:20px;
+}
+
+.social{
+    text-align:center;
+    margin:40px 0;
+}
+
+.social a{
+    color:white;
+    font-size:32px;
+    margin:0 15px;
+    transition:0.3s;
+}
+
+.social a:hover{
+    color:cyan;
+    transform:scale(1.2);
+}
+
+.clock{
+    text-align:center;
+    font-size:22px;
+    margin-top:10px;
+}
+
+footer{
+    text-align:center;
+    padding:20px;
+    background:rgba(0,0,0,0.2);
+}
+
+.top-btn{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    width:50px;
+    height:50px;
+    border:none;
+    border-radius:50%;
+    background:cyan;
+    color:black;
+    font-size:20px;
+    cursor:pointer;
+    box-shadow:0 0 20px cyan;
+}
+
+@media(max-width:768px){
+    h1{
+        font-size:2rem;
+    }
+
+    .profile{
+        width:140px;
+        height:140px;
+    }
+}
+</style>
+</head>
+<body>
+
+<header>
+    <!-- Replace photo.jpg with your photo -->
+    <img src="photo.jpg" alt="James Caringal" class="profile">
+
+    <h1>James Caringal</h1>
+    <p class="subtitle">Caringal Website</p>
+
+    <div class="clock" id="clock"></div>
+</header>
+
+<div class="counter">
+    👁 Visitors: <span id="visits">0</span>
+</div>
+
+<div class="container">
+
+    <div class="card">
+        <h2>📊 Dashboard</h2>
+        <p>Welcome to Caringal Website. Explore updates, projects, and information.</p>
+    </div>
+
+    <div class="card">
+        <h2>👨‍💻 Developer Information</h2>
+        <p><strong>Developer:</strong> James Caringal</p>
+        <p><strong>Website:</strong> Caringal Website</p>
+        <p><strong>Status:</strong> Online ✅</p>
+    </div>
+
+    <div class="card">
+        <h2>🚀 Features</h2>
+        <p>Modern UI, smooth animations, responsive design, glassmorphism effects, and social integration.</p>
+    </div>
+
+    <div class="card">
+        <h2>🎯 Mission</h2>
+        <p>To create awesome content, websites, and digital experiences for everyone.</p>
+    </div>
+
+    <div class="card">
+        <h2>📈 Website Status</h2>
+        <p>All systems operational and running smoothly.</p>
+    </div>
+
+    <div class="card">
+        <h2>📞 Contact</h2>
+        <p>Connect with me through the social media links below.</p>
+    </div>
+
+</div>
+
+<div class="social">
+    <a href="#"><i class="fab fa-facebook"></i></a>
+    <a href="#"><i class="fab fa-tiktok"></i></a>
+    <a href="#"><i class="fab fa-youtube"></i></a>
+    <a href="#"><i class="fab fa-github"></i></a>
+</div>
+
+<footer>
+    © 2026 Caringal Website | Developed by James Caringal
+</footer>
+
+<button class="top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+↑
+</button>
+
+<script>
+// Visitor Counter
+let visits = localStorage.getItem("visits") || 0;
+visits++;
+localStorage.setItem("visits", visits);
+document.getElementById("visits").innerText = visits;
+
+// Live Clock
+function updateClock(){
+    const now = new Date();
+    document.getElementById("clock").innerHTML =
+    now.toLocaleDateString() + " | " + now.toLocaleTimeString();
+}
+setInterval(updateClock,1000);
+updateClock();
+
+// Scroll Animation
+const cards = document.querySelectorAll(".card");
+
+const observer = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+        if(entry.isIntersecting){
+            entry.target.classList.add("show");
+        }
+    });
+});
+
+cards.forEach(card=>observer.observe(card));
+</script>
+
+</body>
+</html>
