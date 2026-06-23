@@ -139,6 +139,24 @@ footer{
     box-shadow:0 0 20px cyan;
 }
 
+.reseller-btn{
+    margin-top:15px;
+    padding:12px 25px;
+    border:none;
+    border-radius:10px;
+    background:cyan;
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+    font-size:16px;
+    box-shadow:0 0 15px cyan;
+    transition:0.3s;
+}
+
+.reseller-btn:hover{
+    transform:scale(1.05);
+}
+
 @media(max-width:768px){
     h1{
         font-size:2rem;
@@ -151,10 +169,10 @@ footer{
 }
 </style>
 </head>
+
 <body>
 
 <header>
-    <!-- Replace photo.jpg with your photo -->
     <img src="photo.jpg" alt="James Caringal" class="profile">
 
     <h1>James Caringal</h1>
@@ -179,6 +197,23 @@ footer{
         <p><strong>Developer:</strong> James Caringal</p>
         <p><strong>Website:</strong> Caringal Website</p>
         <p><strong>Status:</strong> Online ✅</p>
+    </div>
+
+    <!-- RESSELLER CARD -->
+    <div class="card">
+        <h2>🛒 Resellers</h2>
+        <p>Click button to view reseller information.</p>
+
+        <button class="reseller-btn" onclick="toggleReseller()">
+            Show Reseller Information
+        </button>
+
+        <div id="resellerInfo" style="display:none; margin-top:15px;">
+            <h3>📋 Reseller Information</h3>
+            <p><strong>Name:</strong> Ghie Anne</p>
+            <p><strong>Role:</strong> Official Reseller</p>
+            <p><strong>Status:</strong> Active ✅</p>
+        </div>
     </div>
 
     <div class="card">
@@ -219,13 +254,14 @@ footer{
 </button>
 
 <script>
-// Visitor Counter
+
+// Visitor counter
 let visits = localStorage.getItem("visits") || 0;
 visits++;
 localStorage.setItem("visits", visits);
 document.getElementById("visits").innerText = visits;
 
-// Live Clock
+// Clock
 function updateClock(){
     const now = new Date();
     document.getElementById("clock").innerHTML =
@@ -234,7 +270,7 @@ function updateClock(){
 setInterval(updateClock,1000);
 updateClock();
 
-// Scroll Animation
+// Scroll animation
 const cards = document.querySelectorAll(".card");
 
 const observer = new IntersectionObserver(entries=>{
@@ -246,6 +282,18 @@ const observer = new IntersectionObserver(entries=>{
 });
 
 cards.forEach(card=>observer.observe(card));
+
+// Reseller toggle
+function toggleReseller(){
+    const info = document.getElementById("resellerInfo");
+
+    if(info.style.display === "none"){
+        info.style.display = "block";
+    }else{
+        info.style.display = "none";
+    }
+}
+
 </script>
 
 </body>
